@@ -1,20 +1,19 @@
 <template>
     <div id="app">
 
-        <app-header :changeSearch= "changeSearch"/>
+        <app-header :changeSearch="changeSearch"/>
 
         <div class="container">
             <h1 class="pt-3 pb-3">Персонажи Marvel</h1>
            
-
-
-            <app-modal/>
+            <app-modal :character="character"/>
 
             <spinner v-if="loading"/>
 
             <div class="row">
+                <h5 v-if="!searchCharacters.lenght && !loading">Ничего не найденно.....</h5>
                  <div
-                  v-for="(el,idx) in characters" 
+                  v-for="(el,idx) in searchCharacters" 
                   :key="idx" 
                  class="card mb-3 col-sm-12 col-md-6 col-lg-4">
                 <div class="row g-0">
@@ -77,6 +76,13 @@ import { filter } from 'vue/types/umd';
         computed: {
             character: function(){
                 return this.characters[this.characterIndex] || null
+            },
+            searchCharacters: function(){
+                const {characters,search} = this
+                return characters.filter((character) =>{
+                    return character.name.toLoewrCase.indexOf(search.toLoewrCase()) !== -1
+                })
+
             },
         },
         async mounted(){

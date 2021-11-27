@@ -1,7 +1,7 @@
 <template>
     <nav class="navbar navbar-dark bg-dark">
         <div class="container-fluid">
-            <a href="#" class="navbar-brand">Marvel search:{{search}}</a>
+            <a href="#" class="navbar-brand">Marvel</a>
             <form class="d-flex">
                 <input type="search" placeholder="Поиск..." aria-label="Search" class="form-control me-2"
                 v-model="search"
@@ -10,6 +10,7 @@
                 <button 
                 type="reset" 
                 class="btn btn-outline-light"
+                @click="()=>{search='';changeSearch(search)}"
                 
                 >
                     все
