@@ -1,10 +1,11 @@
 <template>
     <div id="app">
 
-        <app-header/>
+        <app-header :changeSearch= "changeSearch"/>
 
         <div class="container">
             <h1 class="pt-3 pb-3">Персонажи Marvel</h1>
+           
 
 
             <app-modal :character="character"/>
@@ -45,6 +46,7 @@
     import Spinner from "./components/Spinner";
     import AppModal from "./components/AppModal";
     import AppHeader from "./components/AppHeader";
+import { filter } from 'vue/types/umd';
 
     export default {
         name: 'App',
@@ -58,6 +60,7 @@
                 loading: false,
                 characters: [],
                 characterIndex: 0,
+                search:'',
             }
         },
         methods: {
@@ -66,11 +69,14 @@
               .then(res => res.json())
               .then(json => this.characters = json)
             },
+            changeSearch: function (value) {
+                this.search = value
+
+            },
         },
         computed: {
             character: function(){
                 return this.characters[this.characterIndex] || null
-
             },
         },
         async mounted(){
