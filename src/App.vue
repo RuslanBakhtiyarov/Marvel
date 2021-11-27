@@ -8,7 +8,7 @@
            
 
 
-            <app-modal :character="character"/>
+            <app-modal/>
 
             <spinner v-if="loading"/>
 
